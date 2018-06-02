@@ -11,6 +11,10 @@ we execute the bash to have prompt on the container
 ```docker
 docker exec -it container-name /bin/bash
 ```
+We use the default apache configuration for this step. All we have to do is to building the docker image with our static content.
+
+![image](images/Step1Infrastructure.png)
+
 This below table show off our setup command
 
 | docker command                             |            Description  |
