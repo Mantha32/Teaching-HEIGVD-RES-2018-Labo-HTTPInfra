@@ -1,0 +1,15 @@
+{
+  "name": "step2-dynamicwebapp",
+  "version": "0.1.0",
+  "description": "mock dynamic web server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Iando Rafid <iando.rafid@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chance": "^1.0.16",
+    "express": "^4.16.3"
+  }
+}
