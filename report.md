@@ -14,15 +14,22 @@ docker exec -it container-name /bin/bash
 This below table show off our setup command
 
 | docker command                             |            Description  |
-| -------------                              |:------------- -----:|
+| -------------------------------------------|:------------------:|
 |  ` docker build -t res/apache-php-static .`| Building the static content web server. The    current directory hold our `Dockerfile` |
 | ` docker run -d -p 9090:80 --name web-static res/apache-php-static`      | Run the container based on the image that we have been created before. This container listen on the 80 and the docker expose the port 9090.|
 
 how to explore the file system of the image
 we execute the bash to have prompt on the container
+
 ```docker
 docker exec -it container-name /bin/bash
 ```
+We inspect the container to check out his Ip adress. On linux machine, We use the docker engine Ip address because the container use docker IP like a gateway.
+
+![image](images/Step1IP_Address.png)
 
 We run the container `web-static ` based on the image ` res/apache-php-static`. This below image show off the result.
+
 ![image](images/Step1StaticWebServer.png)
+
+## Step 2:  Dynamic HTTP server with express.js
