@@ -7,6 +7,7 @@ LABEL version="1.0"
 
 COPY src/ /opt/app
 
-
+# Install the telnet to test the web server
+RUN apt-get update && apt-get install telnet
 
 ENTRYPOINT [ "node", "/opt/app/index.js"]
