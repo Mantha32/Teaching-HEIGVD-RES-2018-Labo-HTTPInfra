@@ -52,7 +52,7 @@ The `express.js` framework is used on top of our profile generator. The profile 
 |  ` docker build -t res/step2express .`| Building the dynamic content web server image. The    current directory hold our `Dockerfile` |
 | ` docker run --name step2 res/step2express`      | Run the container based on this image that we have been created before. This container listen on the 3000.|
 
-Before we connect with our server, we obviously need to check out the container IP address. Thanks to ` docker inspect step2 | grep IPAddress` command, we easly find out this IP address.
+Before we connect with our server, we obviously need to check out the container IP address. Thanks to ` docker inspect step2 | grep -w "gateway\|IPAddress"` command, we easly find out this IP address.
 
 ![image](images/Step2-IP-Address.png)
 
@@ -68,3 +68,20 @@ docker exec -it container-name /bin/bash
 ![image](images/Step2-Telnet-InsideContainer.png)
 
 ## Step 3: Reverse proxy with apache (static configuration)
+On this step, we deploy a reverse-proxy server. This server mimics the gateway server. The httpd itself does not generate or host the data. The content is obtained by static web server (step 1) and the dynamic express server (step 2). Those back-end server have not direct access to the external. The reverse-proxy is the only one entry-point.
+
+### Apache configuration
+Thanks to  `(proxy,proxy_http)` , we can activated the reverse-proxy feature in apache server. The virtual site help to perform the server-proxy. We make up a configuration file, `001-reverse-proxy.conf`, which contains the URI mapping.
+
+| directive                            |            Description  |
+| -------------------------------------------|:------------------:|
+|  ` ProxyPass "/api/profile/" "http://172.17.0.2:3000/api/profile/"`| the inbound request handler for the ressource `/api/profile` is specified to perfom the mapping and determine the backend express server who handle this request |
+| ` ProxyPassReverse "/api/profile/" "http://172.17.0.2:3000/api/profile/`      | outbound : HTTP response back to the client|
+
+
+
+### Deployement dockerised server
+| docker command                             |            Description  |
+| -------------------------------------------|:------------------:|
+|  ` docker build -t res/res/apache-reverse-proxy .`| Building the reverse-proxy web server image. The  current directory hold our `Dockerfile` |
+| ` docker run --name step3 res/apache-reverse-proxy`      | Run the container based on this reverse-proxy image that we have been created before. This container listen on the 80.|
