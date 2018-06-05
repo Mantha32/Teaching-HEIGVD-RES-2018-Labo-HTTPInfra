@@ -34,3 +34,4 @@ RUN a2ensite 001-reverse-proxy.conf
 # It's possible to override this port when you run a container with the option -p or --publish portOut:portIn
 # Alter the portIn value as you want
 EXPOSE 8080
+
