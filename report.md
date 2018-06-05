@@ -71,11 +71,14 @@ docker exec -it container-name /bin/bash
 On this step, we deploy a reverse-proxy server. This server mimics the gateway server. The httpd itself does not generate or host the data. The content is obtained by static web server (step 1) and the dynamic express server (step 2). Those back-end server have not direct access to the external. The reverse-proxy is the only one entry-point.
 
 ### Apache configuration
-Thanks to  `(proxy,proxy_http)` , we can activated the reverse-proxy feature in apache server. The virtual site help to perform the server-proxy. We make up a configuration file, `001-reverse-proxy.conf`, which contains the URI mapping.
+Thanks to  `(proxy,proxy_http)` , we can activated the reverse-proxy feature in apache server. The virtual site help use to perform the server-proxy. We make up a configuration file, `001-reverse-proxy.conf`, which contains the URI mapping. We are disabled the 000-default.conf to ensure that the Apache server apply only our configuration when we are enabled our own configuration.
+
+
+#### configuration directive in `001-reverse-proxy.conf`
 
 | directive                            |            Description  |
 | -------------------------------------------|:------------------:|
-|  ` ProxyPass "/api/profile/" "http://172.17.0.2:3000/api/profile/"`| the inbound request handler for the ressource `/api/profile` is specified to perfom the mapping and determine the backend express server who handle this request |
+|  ` ProxyPass "/api/profile/" "http://172.17.0.2:3000/api/profile/"`| the inbound request handler the ressource `/api/profile` which is specified to perfom the mapping and determine the backend express server who handle this request |
 | ` ProxyPassReverse "/api/profile/" "http://172.17.0.2:3000/api/profile/`      | outbound : HTTP response back to the client|
 
 
@@ -84,4 +87,15 @@ Thanks to  `(proxy,proxy_http)` , we can activated the reverse-proxy feature in 
 | docker command                             |            Description  |
 | -------------------------------------------|:------------------:|
 |  ` docker build -t res/res/apache-reverse-proxy .`| Building the reverse-proxy web server image. The  current directory hold our `Dockerfile` |
-| ` docker run --name step3 res/apache-reverse-proxy`      | Run the container based on this reverse-proxy image that we have been created before. This container listen on the 80.|
+| ` docker run -p 9090:80 --name step3 res/apache-reverse-proxy`      | Run the container based on this reverse-proxy image that we have been created before. This container listen on the 80.|
+
+### Resolution name
+The proxy respond only on the domain demo.res.ch that we set up early.
+We set up the resolution name locally due to our server local. We add our domain information in the  `/etc/hosts`. We assume that the proxy has `172.17.0.1` IP Address.
+By the way, the proxy respond to our request.
+
+![image](images/Step3-DNS-Resolution.png)
+
+We can connect with the proxy server
+
+![image](images/Step3-ProxyServer.png)
