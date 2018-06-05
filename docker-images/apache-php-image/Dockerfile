@@ -9,6 +9,11 @@ LABEL version="1.0"
 
 
 #
+#Install nano for scripting 
+#
+Run apt-get update && apt-get install -y nano
+
+#
 # Replace the directory with your own directory that stands the source file
 # we use the standard folder where hold our static web content
 # example /var/www/html/

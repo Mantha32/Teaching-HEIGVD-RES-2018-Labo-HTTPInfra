@@ -78,15 +78,15 @@ Thanks to  `(proxy,proxy_http)` , we can activated the reverse-proxy feature in 
 
 | directive                            |            Description  |
 | -------------------------------------------|:------------------:|
-|  ` ProxyPass "/api/profile/" "http://172.17.0.2:3000/api/profile/"`| the inbound request handler the ressource `/api/profile` which is specified to perfom the mapping and determine the backend express server who handle this request |
-| ` ProxyPassReverse "/api/profile/" "http://172.17.0.2:3000/api/profile/`      | outbound : HTTP response back to the client|
+|  ` ProxyPass "/api/wine/" "http://172.17.0.2:3000/api/wine/"`| the inbound request handler the ressource `/api/wine` which is specified to perfom the mapping and determine the backend express server who handle this request |
+| ` ProxyPassReverse "/api/wine/" "http://172.17.0.2:3000/api/wine/`      | outbound : HTTP response back to the client|
 
 
 
 ### Deployement dockerised server
 | docker command                             |            Description  |
 | -------------------------------------------|:------------------:|
-|  ` docker build -t res/res/apache-reverse-proxy .`| Building the reverse-proxy web server image. The  current directory hold our `Dockerfile` |
+|  ` docker build -t res/apache-reverse-proxy .`| Building the reverse-proxy web server image. The  current directory hold our `Dockerfile` |
 | ` docker run -p 9090:80 --name step3 res/apache-reverse-proxy`      | Run the container based on this reverse-proxy image that we have been created before. This container listen on the 80.|
 
 ### Resolution name
@@ -99,3 +99,8 @@ By the way, the proxy respond to our request.
 We can connect with the proxy server
 
 ![image](images/Step3-ProxyServer.png)
+
+## Step 4: AJAX requests with JQuery
+On this step, we manage to fetch the dynamic data from the express server into static web page. The AJAX request using `/api/wine/` URI is used to fetch the dynamic data from express server.
+
+The inbound dynamic data is binded on the DOM element of the static web page. Every an ellapse time, the wep page fetch the data from the dynamic express server. we use retrieve the data each 2 secondes.

@@ -5,7 +5,7 @@
 */
 
 var Chance = require('chance');
-var chance = new Chance();
+var chance = new Chance(Math.random);
 
 var express = require('express');
 var app = express();
@@ -15,9 +15,9 @@ app.get('/', function(req, res) {
     res.send('Hello, welcome to our RES INFRA LAB')
 })
 
-// respond with the random profile when a GET request is made to "/api/profile"
-app.get('/api/profile', function(req, res) {
-    res.send(generateProfile());
+// respond with the random profile when a GET request is made to "/api/wine"
+app.get('/api/wine', function(req, res) {
+    res.send(generateGrandCru());
 })
 
 
@@ -26,20 +26,41 @@ app.listen(3000, function() {
 });
 
 
-function generateProfile() {
+function generateOwner() {
     person = {
         firstName: chance.first(),
         lastName: chance.last(),
-        age: chance.age({
-            min: 21,
-            max: 41
-        }),
+        age: chance.integer({ min: 21, max: 56 }),
         gender: chance.gender(),
-        profession: chance.profession(),
         "Beloved pet": chance.animal({ type: 'zoo' }),
         Moto: chance.sentence()
     };
 
     return person;
+
+}
+
+function generateWine() {
+    var wineType = new Array("Barbera", "Burgundy", "Carménère", "Chianti", "Grenache", "Moscato", "Petite Sirah",
+        "Riesling", "Sauvignon Blanc", "Blaufränkisch", "Cabernet Franc", "Chardonnay", "Gamay",
+        "Grüner Veltliner", "Malbec", "Pinot Grigio / Gris", "Rosé Wine", "Syrah & Shiraz", "Zinfandel",
+        " Bordeaux", "Cabernet Sauvignon", "Chenin Blanc", "Gewürztraminer", "Merlot", "Nebbiolo",
+        "Pinot Noir", "Rioja", " Sparkling Wines");
+
+    return wineType[chance.integer({ min: 0, max: (wineType.length - 1) })];
+}
+
+
+function generateGrandCru() {
+    wine = {
+        name: chance.word({ length: 6 }) + " " + chance.animal({ type: 'grassland' }),
+        domain: chance.name({ nationality: 'it' }),
+        AOCOrigin: chance.province({ country: 'it', full: true }),
+        millesim: chance.year({ min: 1950, max: 2013 }),
+        type: generateWine(),
+        owner: generateOwner()
+    };
+
+    return wine;
 
 }
