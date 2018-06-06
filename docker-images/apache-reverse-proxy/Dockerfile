@@ -11,22 +11,21 @@ LABEL version="1.0"
 
 RUN apt-get update && apt-get upgrade -y
 
+# Copy the our own script version
+COPY apache2-foreground /usr/local/bin
+
+# Copy the content in the template folder: our own virtaul configuration with the dynamic URL 
+COPY templates /var/apache2/templates
+
 # Copy our own apache configuration file
-COPY conf/ /etc/apache2/sites-available/
+COPY conf/ /etc/apache2
 
 #Enable the plugin proxy and proxy_http module
 RUN a2enmod proxy && a2enmod proxy_http
 
-# Disable the default site
-RUN a2dissite 000-default
-
 # Enable our config
-RUN a2ensite 001-reverse-proxy.conf
+RUN a2ensite 000-* 001-reverse-proxy.conf
 
-#Reload HTTPD Configuration File Without Restarting Apache Config Changes
-#RUN /etc/init.d/apache2 reload
-
-#RUN service apache2 reload
 
 
 # Set up the default port
