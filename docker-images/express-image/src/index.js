@@ -56,7 +56,7 @@ function generateGrandCru() {
         name: chance.word({ length: 6 }) + " " + chance.animal({ type: 'grassland' }),
         domain: chance.name({ nationality: 'it' }),
         AOCOrigin: chance.province({ country: 'it', full: true }),
-        millesim: chance.year({ min: 1950, max: 2013 }),
+        millesime: chance.year({ min: 1950, max: 2013 }),
         type: generateWine(),
         owner: generateOwner()
     };

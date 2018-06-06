@@ -4,16 +4,24 @@ $(function() {
     function loadWine() {
         $.getJSON("/api/wine/", function(wine) {
             console.log(wine);
-            var message = "No body is here";
-            if (typeof students !== 'undefined') {
-                message = "<b> name: </b>" + wine.name;
-                $(".wine-domain").text(" <b> Domain:  </b>" + wine.domain);
-                $(".wine-AOC-Origin").text("<b>AOC origin:</b> " + wine.AOCOrigin);
-                $(".wine-millesim").text("<b>Millesim: </b>" + wine.millesim);
-                $(".wine-type").text("<b>Type: </b>" + wine.type);
+            var message = "Unvailable information!";
+            if (typeof wine !== 'undefined') {
+                $(".wine-name").text(wine.name);
+                $(".wine-domain").text(wine.domain);
+                $(".wine-AOC-Origin").text(wine.AOCOrigin);
+                $(".wine-millesime").text(wine.millesime);
+                $(".wine-type").text(wine.type);
+                $(".wine-owner").text(wine.owner.firstName + " " + wine.owner.lastName);
 
+            } else {
+                $(".wine-name").text(message);
+                $(".wine-domain").text(message);
+                $(".wine-AOC-Origin").text(message);
+                $(".wine-millesime").text(message);
+                $(".wine-type").text(message);
+                $(".wine-owner").text(message);
             }
-            $(".wine-name").text(message);
+
 
         });
 

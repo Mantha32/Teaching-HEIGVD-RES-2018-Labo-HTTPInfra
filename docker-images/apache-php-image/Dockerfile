@@ -7,12 +7,6 @@ The default http port is 80."
 LABEL authors="Yosra Harbaoui, Iando Rafidimalala"
 LABEL version="1.0"
 
-
-#
-#Install nano for scripting 
-#
-Run apt-get update && apt-get install -y nano
-
 #
 # Replace the directory with your own directory that stands the source file
 # we use the standard folder where hold our static web content
@@ -20,9 +14,6 @@ Run apt-get update && apt-get install -y nano
 #
 
 COPY content/ /var/www/html/
-
-# Copy our own apache configuration file
-#COPY conf/ /etc/apache2/site-available/
 
 # Set up the default port
 # The container listen on this specific port
