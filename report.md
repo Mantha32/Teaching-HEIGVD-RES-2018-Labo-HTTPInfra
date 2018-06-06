@@ -98,5 +98,3 @@ We can connect with the reverse proxy server
 On this step, we manage to fetch the dynamic data from the express server into static web page. The AJAX request using `/api/wine/` URI is used to fetch the dynamic data in the static web page from express server. The inbound dynamic data is binded on the DOM element of the static web page. Every an ellapse time, the static web page fetch the data from the dynamic express server. The static web page retrieves the data each 2 secondes.
 
 ![image](images/Step4-Ajax-request.png)
-
-## Step 5 : Dynamic reverse proxy
