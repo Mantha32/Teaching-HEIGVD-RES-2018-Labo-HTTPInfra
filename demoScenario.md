@@ -12,6 +12,7 @@
 |  kill a container    |  `docker kill container-name` |
 |  Build a image  |  `docker build -t image-name .` |
 |  Inspect the inner address of a container  |  `docker inspect image-name  grep -i IPAddress` |
+| bash execution inside the container | `docker exec -it apache_rp /bin/bash`|
 
 
 
@@ -38,22 +39,17 @@ Clean the docker up
 
 ## Step5: Dynamic reverse proxy
 ### how to work
-Repo-github php:7.0-apache:
-
-`https://github.com/docker-library/php/tree/master/7.0/jessie/apache`
-
-Why
-
-In the php image Dockerfile:
 
 
 ### Demo-scenario
 #### Show off the configuration
-- Create the image server static: `docker build -t res/apache-st .`
-- Create the container : ``
-- Create the image server dynamic: `docker build -t res/express .`
-- Create the image server reverse proxy:  `docker build -t res/apache-rp .`
-
+- clean docker:
+- create static image: `docker build -t res/apache_st apache-php-static/.`
+- create some container : `docker -d res/apache_st`
+- create dynamic image: `docker build -t res/express express-image/.`
+- create some image: `docker run -d res/express`
+- create reverse proxy server : ` docker build -t res/apache_rp apache-reverse-proxy/.`
+-create the container rp: `docker run -d -p 8080:80 -e STATIC_APP=172.17.0.9 -e DYNAMIC_APP=172.17.0.10 --name apache_rp res/apache_rp`
 
 
 ## Extra

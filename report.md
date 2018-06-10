@@ -90,9 +90,9 @@ By the way, the proxy respond to our request.
 
 ![image](images/Step3-DNS-Resolution.png)
 
-We can connect with the reverse proxy server
+We can connect with the reverse proxy server using this domain
 
-![image](images/Step3-ProxyServer.png)
+![image](images/Step3-ReverseProxy.png)
 
 ## Step 4: AJAX requests with JQuery
 On this step, we manage to fetch the dynamic data from the express server into static web page. The AJAX request using `/api/wine/` URI is used to fetch the dynamic data in the static web page from express server. The inbound dynamic data is binded on the DOM element of the static web page. Every an ellapse time, the static web page fetch the data from the dynamic express server. The static web page retrieves the data each 2 secondes.
@@ -101,3 +101,20 @@ On this step, we manage to fetch the dynamic data from the express server into s
 
 
 ## Step 5: Dynamic reverse proxy configuration
+The main idea is to override the reverse proxy configuration file.
+According the webcast, starting the container override the IP address static and dynamic thanks to environment variable  `-e STATIC_APP=172.17.0.x -e DYNAMIC_APP=172.17.0.y`.
+
+| command                             |            Description  |
+| -------------------------------------------|:------------------:|
+|  ` docker run -d -p 8080:80 -e STATIC_APP=172.17.0.x -e DYNAMIC_APP=172.17.0.y --name apache_rp res/apache_rp`| Starting the container add setup the environment variable that keep on the IP Address static and dynamic. During this process the script bash `apache2-foreground` calls. |
+| ` php /var/apache2/templates/config-template.php > /etc/apache2/sites-available/001-reverse-proxy.conf`      | During the starting process, this command override the static configuration we have on the step 4 thanks to available environment variable that we define earlier. The `foreground` script hold this command. |
+
+
+## Bonus
+### Load balancing: multiple server nodes
+
+### Load balancing: round-robin vs sticky sessions
+
+### Dynamic cluster management
+
+### Management UI

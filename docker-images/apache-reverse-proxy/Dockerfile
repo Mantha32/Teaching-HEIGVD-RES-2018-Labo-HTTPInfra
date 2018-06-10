@@ -14,7 +14,7 @@ RUN apt-get update && apt-get upgrade -y
 # Copy the our own script version
 COPY apache2-foreground /usr/local/bin
 
-# Copy the content in the template folder: our own virtaul configuration with the dynamic URL 
+# Copy the content in the template folder: our own virtual configuration with the dynamic URL 
 COPY templates /var/apache2/templates
 
 # Copy our own apache configuration file
