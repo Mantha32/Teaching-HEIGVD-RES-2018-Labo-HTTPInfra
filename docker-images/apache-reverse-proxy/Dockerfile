@@ -23,8 +23,13 @@ COPY conf/ /etc/apache2
 #Enable the plugin proxy and proxy_http module
 RUN a2enmod proxy && a2enmod proxy_http
 
+#Enable the laod balancer
+RUN a2enmod proxy_balancer
+
 # Enable our config
 RUN a2ensite 000-* 001-reverse-proxy.conf
+
+
 
 
 

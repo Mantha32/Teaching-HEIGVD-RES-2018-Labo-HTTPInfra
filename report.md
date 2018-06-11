@@ -113,6 +113,14 @@ According the webcast, starting the container override the IP address static and
 ## Bonus
 ### Load balancing: multiple server nodes
 
+[source load balancing](https://www.elastichosts.com/blog/add-a-front-end-apache-cloud-load-balancer/)
+
+
+Thanks to the module `proxy_balancer`, we can enable this apache feature like we do with reverse proxy. We add the command to enable this module on our Dockerfile. The `proxy_balancer` can keep track of sessions, so a single user always deals with the same backend web server.
+
+#### Enabled load balancing
+
+
 ### Load balancing: round-robin vs sticky sessions
 
 ### Dynamic cluster management
