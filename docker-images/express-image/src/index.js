@@ -6,19 +6,23 @@
 
 var Chance = require('chance');
 var chance = new Chance(Math.random);
+var ip = require("ip");
 
 var express = require('express');
 var app = express();
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', function(req, res) {
-    res.send('Hello, welcome to our RES INFRA LAB')
+// respond with ipaddress for the server when a GET request is made to the homepage
+app.get('/ip', function(req, res) {
+
+    innerAddr = { ip: ip.address() }
+    res.send(innerAddr);
 })
 
 // respond with the random profile when a GET request is made to "/api/wine"
 app.get('/api/wine', function(req, res) {
     res.send(generateGrandCru());
 })
+
 
 
 app.listen(3000, function() {
