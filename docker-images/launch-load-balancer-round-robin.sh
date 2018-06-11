@@ -54,3 +54,8 @@ echo " ip_dynamic3 : " $ip_dynamic3
 
 
 docker run -d -p 8080:80 -e STATIC_APP_1=$ip_static1 -e STATIC_APP_2=$ip_static2 -e STATIC_APP_3=$ip_static3 -e DYNAMIC_APP_1=$ip_dynamic1  -e DYNAMIC_APP_2=$ip_dynamic2 -e DYNAMIC_APP_3=$ip_dynamic3 --name apache_rp res/apache_rp
+
+
+docker ps -a
+docker images
+
