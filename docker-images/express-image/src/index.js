@@ -6,9 +6,11 @@
 
 var Chance = require('chance');
 var chance = new Chance(Math.random);
+var ip = require("ip");
 
 var express = require('express');
 var app = express();
+ipaddress = ip.address();
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function(req, res) {
@@ -58,7 +60,8 @@ function generateGrandCru() {
         AOCOrigin: chance.province({ country: 'it', full: true }),
         millesime: chance.year({ min: 1950, max: 2013 }),
         type: generateWine(),
-        owner: generateOwner()
+        owner: generateOwner(),
+        ip: ipaddress.ip
     };
 
     return wine;

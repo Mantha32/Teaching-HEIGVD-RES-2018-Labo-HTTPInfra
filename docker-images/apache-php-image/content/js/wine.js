@@ -11,6 +11,7 @@ $(function() {
                 $(".wine-AOC-Origin").text(wine.AOCOrigin);
                 $(".wine-millesime").text(wine.millesime);
                 $(".wine-type").text(wine.type);
+                $(".wine-ip").text(wine.ip);
                 $(".wine-owner").text(wine.owner.firstName + " " + wine.owner.lastName);
 
             } else {
@@ -20,6 +21,7 @@ $(function() {
                 $(".wine-millesime").text(message);
                 $(".wine-type").text(message);
                 $(".wine-owner").text(message);
+                $(".wine-ip").text(message);
             }
 
 
