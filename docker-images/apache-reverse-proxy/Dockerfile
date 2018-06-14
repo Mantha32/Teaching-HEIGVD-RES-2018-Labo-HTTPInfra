@@ -9,7 +9,7 @@ LABEL authors="Yosra Harbaoui, Iando Rafidimalala"
 LABEL version="1.0"
 
 
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y nano
 
 
 # Copy the our own script version
@@ -25,10 +25,7 @@ COPY conf/ /etc/apache2
 RUN a2enmod proxy && a2enmod proxy_http
 
 #Enable load balancer round-robin
-RUN a2enmod proxy_balancer lbmethod_byrequests
-
-#Enable the laod balancer
-RUN a2enmod proxy_balancer
+RUN a2enmod proxy_balancer lbmethod_byrequests headers status
 
 # Enable our config
 RUN a2ensite 000-* 001-reverse-proxy.conf

@@ -11,13 +11,6 @@ var ip = require("ip");
 var express = require('express');
 var app = express();
 
-// respond with ipaddress for the server when a GET request is made to the homepage
-app.get('/ip', function(req, res) {
-
-    innerAddr = { ip: ip.address() }
-    res.send(innerAddr);
-})
-
 // respond with the random profile when a GET request is made to "/api/wine"
 app.get('/api/wine', function(req, res) {
     res.send(generateGrandCru());
@@ -62,6 +55,7 @@ function generateGrandCru() {
         AOCOrigin: chance.province({ country: 'it', full: true }),
         millesime: chance.year({ min: 1950, max: 2013 }),
         type: generateWine(),
+        ip: ip.address(),
         owner: generateOwner()
     };
 

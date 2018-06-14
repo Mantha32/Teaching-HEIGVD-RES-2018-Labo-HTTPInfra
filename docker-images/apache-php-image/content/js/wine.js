@@ -11,6 +11,7 @@ $(function() {
                 $(".wine-AOC-Origin").text(wine.AOCOrigin);
                 $(".wine-millesime").text(wine.millesime);
                 $(".wine-type").text(wine.type);
+                $(".ip-dynamic").text(wine.ip);
                 $(".wine-owner").text(wine.owner.firstName + " " + wine.owner.lastName);
 
             } else {
@@ -19,6 +20,7 @@ $(function() {
                 $(".wine-AOC-Origin").text(message);
                 $(".wine-millesime").text(message);
                 $(".wine-type").text(message);
+                $(".ip-dynamic").text(message);
                 $(".wine-owner").text(message);
             }
 
@@ -29,26 +31,4 @@ $(function() {
 
     loadWine();
     setInterval(loadWine, 2000)
-
-    function loadIP() {
-        $.getJSON("/ip/", function(ipaddress) {
-            console.log(ipaddress);
-            var message = "Unvailable IP information!";
-            if (typeof ipaddress !== 'undefined') {
-                $(".ip-dynamic").text(ipaddress.ip);
-
-            } else {
-                $(".ip-dynamic").text(message);
-
-            }
-
-
-        });
-
-
-    };
-
-    loadIP();
-    setInterval(loadIP, 2000)
-
 });
