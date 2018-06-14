@@ -11,6 +11,7 @@ LABEL version="1.0"
 
 RUN apt-get update && apt-get upgrade -y
 
+
 # Copy the our own script version
 COPY apache2-foreground /usr/local/bin
 
@@ -31,12 +32,6 @@ RUN a2enmod proxy_balancer
 
 # Enable our config
 RUN a2ensite 000-* 001-reverse-proxy.conf
-
-#Enable the load-balancer config
-#RUN a2ensite 000-*  002-*
-
-
-
 
 # Set up the default port
 # The container listen on this specific port
