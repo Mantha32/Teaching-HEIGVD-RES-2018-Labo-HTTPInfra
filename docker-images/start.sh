@@ -55,6 +55,17 @@ echo " ip_dynamic3 : " $ip_dynamic3
 
 docker run -d -p 8080:80 -e STATIC_APP_1=$ip_static1 -e STATIC_APP_2=$ip_static2 -e STATIC_APP_3=$ip_static3 -e DYNAMIC_APP_1=$ip_dynamic1  -e DYNAMIC_APP_2=$ip_dynamic2 -e DYNAMIC_APP_3=$ip_dynamic3 --name apache_rp res/apache_rp
 
+
+echo "build the container manager"
+
+docker run -d -p 9000:9000 --name manager -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+
+ip_manage = $(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' express_dynamic3)
+
+echo "IP container manager : " $ip_manage
+echo "checkout this ressource in your beloved browser : " $ip_manage ":9000"
+
+echo "check out the current running container and images"
 docker ps -a
 docker images
 
