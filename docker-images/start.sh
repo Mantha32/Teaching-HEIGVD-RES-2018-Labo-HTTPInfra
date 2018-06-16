@@ -60,10 +60,10 @@ echo "build the container manager"
 
 docker run -d -p 9000:9000 --name manager -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
 
-ip_manage = $(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' express_dynamic3)
+ip_manager=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' manager)
 
-echo "IP container manager : " $ip_manage
-echo "checkout this ressource in your beloved browser : " $ip_manage ":9000"
+echo "IP container manager : " $ip_manager
+echo "checkout this ressource in your beloved browser : " $ip_manager":9000"
 
 echo "check out the current running container and images"
 docker ps -a

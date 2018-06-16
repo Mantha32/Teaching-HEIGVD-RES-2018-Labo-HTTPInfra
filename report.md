@@ -117,7 +117,10 @@ According the webcast, starting the container override the IP address static and
 
 
 Thanks to the module `proxy_balancer`, we can enable this apache feature like we do with reverse proxy. We add the command to enable this module on our Dockerfile. The `proxy_balancer` can keep track of sessions, so a single user always deals with the same backend web server.
+In the reverse-prxy configuration, we define two cluster that hold static and dynamic balancer member. The balancer member define URI for our back-end ressources.
+Thanks to the `portainer` image, we can manage easly our infrastructure. We build this container with this command.
 
-#### Enabled load balancing
-define  two cluster: dynamic and static_app
-Enable proxy-balancer in Dockerfile
+`docker run -d -p 9000:9000 --name manager -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer`
+
+We can checkout this manger ressource using the port 9000.
+![images](images/BONUS_StickySession.png)
